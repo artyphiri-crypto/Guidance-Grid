@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Guidance Grid</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">Guidance<span>Grid</span></a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="learning.html">Learning Hub</a></li>
+            <li><a href="products.html">Digital Products</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="events-stories.html">Events & Stories</a></li>
+            <li><a href="upload.html">Upload Documents</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Banner -->
+    <section class="dashboard-hero">
+        <div class="hero-wrapper">
+            <div>
+                <h1>Mentee Workspace</h1>
+                <p>Track your active 1-on-1 sessions, review document feedback, and access advisor notes.</p>
+            </div>
+            <a href="upload.html" class="btn-primary">+ Submit New Document</a>
+        </div>
+    </section>
+
+    <!-- Main Workspace Container -->
+    <section class="section-container">
+        
+        <!-- Summary Metric Cards -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon blue">📅</div>
+                <div class="metric-data">
+                    <span class="metric-value">1</span>
+                    <span class="metric-label">Scheduled Session</span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon amber">⏳</div>
+                <div class="metric-data">
+                    <span class="metric-value">1</span>
+                    <span class="metric-label">Pending Review</span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon green">✅</div>
+                <div class="metric-data">
+                    <span class="metric-value">2</span>
+                    <span class="metric-label">Completed Reviews</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area: Tables & Side Activity -->
+        <div class="workspace-grid">
+            
+            <!-- Left Side: Table Area -->
+            <div class="main-workspace-card">
+                <div class="card-header">
+                    <h2>Recent Mentorship Activity</h2>
+                    <span class="badge-neutral">Updated Today</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="activity-table">
+                        <thead>
+                            <tr>
+                                <th>Activity Type</th>
+                                <th>Advisor / Sector</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>CV & Resume Review</strong>
+                                    <div class="table-subtext">Agribusiness Application</div>
+                                </td>
+                                <td>Agribusiness Advisory</td>
+                                <td>Sept 5, 2026</td>
+                                <td><span class="status-pill in-review">In Review</span></td>
+                                <td><button class="btn-table disabled">Awaiting Notes</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>1-on-1 Strategy Call</strong>
+                                    <div class="table-subtext">30 Min Consultation</div>
+                                </td>
+                                <td>Dr. Evelyn Banda</td>
+                                <td>Sept 10, 2026</td>
+                                <td><span class="status-pill confirmed">Confirmed</span></td>
+                                <td><a href="#" class="btn-table link">Join Meeting</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Business Proposal Review</strong>
+                                    <div class="table-subtext">Feasibility Study Feedback</div>
+                                </td>
+                                <td>Finance & Investment</td>
+                                <td>Aug 28, 2026</td>
+                                <td><span class="status-pill completed">Completed</span></td>
+                                <td><button class="btn-table link" onclick="openFeedbackModal()">View Feedback</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Side: Upcoming Session Spotlight -->
+            <div class="sidebar-workspace-card">
+                <h3>Next Upcoming Session</h3>
+                <div class="upcoming-session-box">
+                    <div class="session-avatar">EB</div>
+                    <div class="session-details">
+                        <h4>Dr. Evelyn Banda</h4>
+                        <p class="session-role">Agribusiness Specialist</p>
+                        <p class="session-time">🗓️ Sept 10, 2026 • 14:00 CAT</p>
+                    </div>
+                </div>
+                <div class="session-actions">
+                    <button class="btn-primary btn-full">Add to Google Calendar</button>
+                    <button class="btn-secondary btn-full" style="margin-top: 8px;">Reschedule</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Feedback Modal Popup -->
+    <div id="feedbackModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Advisor Feedback Notes</h3>
+                <button class="modal-close" onclick="closeFeedbackModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Reviewer:</strong> Financial & Agribusiness Specialist</p>
+                <p><strong>Document:</strong> Feasibility_Study_Draft.pdf</p>
+                <hr style="margin: 15px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <h4>Key Observations:</h4>
+                <ul style="padding-left: 20px; color: #475569; margin-top: 8px; line-height: 1.6;">
+                    <li>Executive summary is clear and highlights key financial targets well.</li>
+                    <li>Recommend updating your operating cost projection table to include detailed breakdown items.</li>
+                    <li>Risk assessment section is strong—ready for stakeholder presentation.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="closeFeedbackModal()">Close Window</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Guidance Grid Network. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openFeedbackModal() {
+            document.getElementById('feedbackModal').style.display = 'flex';
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

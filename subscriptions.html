@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Portal | Guidance Grid</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">Guidance<span>Grid</span></a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="learning.html">Learning Hub</a></li>
+            <li><a href="products.html">Digital Products</a></li>
+            <li><a href="subscriptions.html" class="active">Subscriptions</a></li>
+            <li><a href="events-stories.html">Events & Stories</a></li>
+            <li><a href="upload.html">Upload Documents</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header Banner -->
+    <section class="dashboard-hero">
+        <div class="hero-wrapper">
+            <div>
+                <h1>Service Subscription Plans</h1>
+                <p>Subscribe to dedicated service tiers or unlock full ecosystem access to reach your goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Categories Container -->
+    <section class="section-container">
+        
+        <div class="pricing-grid">
+            
+            <!-- Category 1: Digital Products Only -->
+            <div class="pricing-card">
+                <div class="plan-header">
+                    <span class="sector-badge">Digital Products</span>
+                    <h3 style="margin-top: 8px;">Toolkit Pass</h3>
+                    <p class="plan-subtitle">For users needing downloadable resources and templates.</p>
+                </div>
+                <div class="plan-price">
+                    <span class="currency-primary">₦10,000</span>
+                    <span class="currency-secondary">/ MWK 12,000</span>
+                    <span class="plan-duration">Monthly Access</span>
+                </div>
+                <ul class="plan-features">
+                    <li>✔ Unlimited downloads across Digital Products</li>
+                    <li>✔ Free access to feasibility & financial spreadsheets</li>
+                    <li>✔ New templates added monthly</li>
+                    <li>✖ Excludes 1-on-1 advisor sessions</li>
+                </ul>
+                <button class="btn-secondary btn-full" onclick="alert('Subscribing to Digital Products Pass...')">Unlock Products</button>
+            </div>
+
+            <!-- Category 2: Document Reviews Only -->
+            <div class="pricing-card">
+                <div class="plan-header">
+                    <span class="sector-badge">Document Review</span>
+                    <h3 style="margin-top: 8px;">Review Pass</h3>
+                    <p class="plan-subtitle">For targeted feedback on proposals and CVs.</p>
+                </div>
+                <div class="plan-price">
+                    <span class="currency-primary">₦18,000</span>
+                    <span class="currency-secondary">/ MWK 22,000</span>
+                    <span class="plan-duration">Monthly Access</span>
+                </div>
+                <ul class="plan-features">
+                    <li>✔ 3 Professional document reviews per month</li>
+                    <li>✔ Detailed written feedback & suggestions</li>
+                    <li>✔ Cover letter & technical resume optimization</li>
+                    <li>✖ Excludes 1-on-1 advisor calls</li>
+                </ul>
+                <button class="btn-secondary btn-full" onclick="alert('Subscribing to Document Review Pass...')">Unlock Reviews</button>
+            </div>
+
+            <!-- Category 3: 1-on-1 Mentorship Only -->
+            <div class="pricing-card">
+                <div class="plan-header">
+                    <span class="sector-badge">1-on-1 Mentorship</span>
+                    <h3 style="margin-top: 8px;">Direct Advisory</h3>
+                    <p class="plan-subtitle">Personalized live consultation with sector leads.</p>
+                </div>
+                <div class="plan-price">
+                    <span class="currency-primary">₦40,000</span>
+                    <span class="currency-secondary">/ MWK 50,000</span>
+                    <span class="plan-duration">Monthly Access</span>
+                </div>
+                <ul class="plan-features">
+                    <li>✔ <strong>2 Scheduled 1-on-1 strategy calls</strong></li>
+                    <li>✔ Direct chat access with assigned mentor</li>
+                    <li>✔ Tailored guidance & progress tracking</li>
+                    <li>✖ Standard rates apply for extra document reviews</li>
+                </ul>
+                <button class="btn-secondary btn-full" onclick="alert('Subscribing to Direct Advisory Pass...')">Unlock Mentorship</button>
+            </div>
+
+            <!-- Category 4: All-Access VIP Bundle -->
+            <div class="pricing-card featured-plan">
+                <div class="plan-badge">Full Network Access</div>
+                <div class="plan-header">
+                    <span class="sector-badge" style="background:#dbeafe;">All Services</span>
+                    <h3 style="margin-top: 8px;">All-Access VIP</h3>
+                    <p class="plan-subtitle">Complete access across mentorship, products, and hub.</p>
+                </div>
+                <div class="plan-price">
+                    <span class="currency-primary">₦65,000</span>
+                    <span class="currency-secondary">/ MWK 80,000</span>
+                    <span class="plan-duration">Monthly Access</span>
+                </div>
+                <ul class="plan-features">
+                    <li>✔ <strong>Includes 1-on-1 Advisory Sessions</strong></li>
+                    <li>✔ <strong>Unlimited Digital Product Downloads</strong></li>
+                    <li>✔ Unlimited Document Reviews</li>
+                    <li>✔ Full access to Learning Hub & Workshops</li>
+                </ul>
+                <button class="btn-primary btn-full" onclick="alert('Subscribing to All-Access VIP Pass...')">Get Full Access</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Guidance Grid Network. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
