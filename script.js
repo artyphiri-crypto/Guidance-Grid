@@ -60,6 +60,21 @@ const mentors = [
 
 let currentSector = 'all';
 
+// Simulated Subscription State
+const userSubscription = {
+    hasProductsAccess: false,
+    hasReviewAccess: false,
+    hasMentorshipAccess: false
+};
+
+// Helper: Escape Strings for Dynamic HTML Rendering
+function escapeHTML(str) {
+    return String(str || '').replace(/[&<>"']/g, match => {
+        const escapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+        return escapeMap[match];
+    });
+}
+
 // Render Mentors Dynamically to Grid
 function displayMentors(data) {
     const grid = document.getElementById('mentors-grid');
@@ -67,26 +82,30 @@ function displayMentors(data) {
     
     grid.innerHTML = '';
 
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
         grid.innerHTML = '<p class="no-results" style="color: #64748b; grid-column: 1/-1; text-align: center; padding: 20px;">No mentors found matching your criteria.</p>';
         return;
     }
+
+    const fragment = document.createDocumentFragment();
 
     data.forEach(mentor => {
         const card = document.createElement('div');
         card.className = 'mentor-card';
         card.innerHTML = `
             <div class="mentor-card-header">
-                <div class="mentor-avatar">${mentor.initials || 'MG'}</div>
-                <span class="sector-badge">${mentor.field}</span>
+                <div class="mentor-avatar">${escapeHTML(mentor.initials || 'MG')}</div>
+                <span class="sector-badge">${escapeHTML(mentor.field)}</span>
             </div>
-            <h3>${mentor.name}</h3>
-            <p class="mentor-title" style="font-weight: 600; color: #2563eb; margin-bottom: 8px;">${mentor.title}</p>
-            <p class="mentor-bio" style="color: #475569; font-size: 0.9rem; margin-bottom: 15px;">${mentor.bio}</p>
-            <button class="btn-primary btn-full" onclick="openBookingModal('${mentor.name}', '${mentor.title}')">Book 1-on-1 Session</button>
+            <h3>${escapeHTML(mentor.name)}</h3>
+            <p class="mentor-title" style="font-weight: 600; color: #2563eb; margin-bottom: 8px;">${escapeHTML(mentor.title)}</p>
+            <p class="mentor-bio" style="color: #475569; font-size: 0.9rem; margin-bottom: 15px;">${escapeHTML(mentor.bio)}</p>
+            <button class="btn-primary btn-full" onclick="checkServiceAccess('mentorship', () => openBookingModal('${escapeHTML(mentor.name)}', '${escapeHTML(mentor.title)}'))">Book 1-on-1 Session</button>
         `;
-        grid.appendChild(card);
+        fragment.appendChild(card);
     });
+
+    grid.appendChild(fragment);
 }
 
 // Search and Sector Filter Handler
@@ -95,7 +114,9 @@ function filterAndSearchMentors() {
     const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
     const filtered = mentors.filter(mentor => {
-        const matchesSector = (currentSector === 'all') || (mentor.field === currentSector);
+        const matchesSector = (currentSector === 'all') || 
+                              (mentor.field.toLowerCase() === currentSector.toLowerCase());
+        
         const matchesQuery = mentor.name.toLowerCase().includes(query) ||
                              mentor.title.toLowerCase().includes(query) ||
                              mentor.bio.toLowerCase().includes(query) ||
@@ -147,17 +168,108 @@ function confirmBooking(e) {
     closeModal();
 }
 
+// Access Gatekeeper Helper
+function checkServiceAccess(serviceType, actionCallback) {
+    if (serviceType === 'products' && !userSubscription.hasProductsAccess) {
+        if (confirm("Subscription Required: You need a 'Toolkit Pass' or 'All-Access VIP' to download this product. Would you like to view subscription plans?")) {
+            window.location.href = "subscriptions.html";
+        }
+        return;
+    }
+    
+    if (serviceType === 'mentorship' && !userSubscription.hasMentorshipAccess) {
+        if (confirm("Subscription Required: You need a 'Direct Advisory' or 'All-Access VIP' plan to book 1-on-1 sessions. Would you like to view subscription plans?")) {
+            window.location.href = "subscriptions.html";
+        }
+        return;
+    }
+
+    if (typeof actionCallback === 'function') {
+        actionCallback();
+    }
+}
+
+// Toggle Chat Window
+function toggleChatWindow() {
+    const chatWindow = document.getElementById('chat-window');
+    if (chatWindow) {
+        chatWindow.classList.toggle('chat-window-hidden');
+    }
+}
+
+// Handle Enter Key Press
+function handleChatKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendChatMessage();
+    }
+}
+
+// Send Message Engine
+function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const messagesContainer = document.getElementById('chatMessages');
+    if (!input || !messagesContainer) return;
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    // Render User Message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user-message';
+    userMsg.innerText = text;
+    messagesContainer.appendChild(userMsg);
+
+    input.value = '';
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Render Simulated AI Response
+    setTimeout(() => {
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'message ai-message';
+        
+        const lowerText = text.toLowerCase();
+        if (lowerText.includes('mentor') || lowerText.includes('advisor')) {
+            aiMsg.innerText = "You can filter verified advisors by field right on the Home page grid, or use the search bar to find experts like Dr. Evelyn Banda or Alex Phiri.";
+        } else if (lowerText.includes('upload') || lowerText.includes('cv') || lowerText.includes('proposal')) {
+            aiMsg.innerText = "To submit documents for specialist review, visit the 'Upload Documents' tab in the main navigation menu.";
+        } else if (lowerText.includes('event') || lowerText.includes('webinar')) {
+            aiMsg.innerText = "Check out our 'Events & Stories' page to register for upcoming interactive masterclasses and workshops.";
+        } else {
+            aiMsg.innerText = "Thanks for asking! I am trained to assist with mentor matching, document reviews, and workshop scheduling across Guidance Grid.";
+        }
+
+        messagesContainer.appendChild(aiMsg);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 600);
+}
+
 // Google Sign-In Placeholder Logic
 function handleGoogleAuth() {
     alert("Google Authentication Initialised! Connecting to Guidance Grid account portal...");
 }
 
-// DOM Initialization
+// Central DOM Initialization
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial display call
+    // 1. Initial mentor grid render
     displayMentors(mentors);
 
-    // Mentor Application Form Handler (Home Page)
+    // 2. Navigation Toggle Handling
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('nav-active');
+            });
+        });
+    }
+
+    // 3. Mentor Application Form Handler
     const mentorForm = document.getElementById('mentor-form') || document.getElementById('mentor-apply-form');
     if (mentorForm) {
         mentorForm.addEventListener('submit', function(e) {
@@ -190,84 +302,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-// Toggle Chat Window
-function toggleChatWindow() {
-    const chatWindow = document.getElementById('chat-window');
-    if (chatWindow) {
-        chatWindow.classList.toggle('chat-window-hidden');
-    }
-}
-
-// Handle Enter Key Press
-function handleChatKeyPress(event) {
-    if (event.key === 'Enter') {
-        sendChatMessage();
-    }
-}
-
-// Send Message Engine
-function sendChatMessage() {
-    const input = document.getElementById('chatInput');
-    const messagesContainer = document.getElementById('chatMessages');
-    const text = input.value.trim();
-
-    if (!text) return;
-
-    // 1. Render User Message
-    const userMsg = document.createElement('div');
-    userMsg.className = 'message user-message';
-    userMsg.innerText = text;
-    messagesContainer.appendChild(userMsg);
-
-    input.value = '';
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    // 2. Generate Simulated AI Response
-    setTimeout(() => {
-        const aiMsg = document.createElement('div');
-        aiMsg.className = 'message ai-message';
-        
-        // Smart Response Keyword Routing
-        const lowerText = text.toLowerCase();
-        if (lowerText.includes('mentor') || lowerText.includes('advisor')) {
-            aiMsg.innerText = "You can filter verified advisors by field right on the Home page grid, or use the search bar to find experts like Dr. Evelyn Banda or Alex Phiri.";
-        } else if (lowerText.includes('upload') || lowerText.includes('cv') || lowerText.includes('proposal')) {
-            aiMsg.innerText = "To submit documents for specialist review, visit the 'Upload Documents' tab in the main navigation menu.";
-        } else if (lowerText.includes('event') || lowerText.includes('webinar')) {
-            aiMsg.innerText = "Check out our 'Events & Stories' page to register for upcoming interactive masterclasses and workshops.";
-        } else {
-            aiMsg.innerText = "Thanks for asking! I am trained to assist with mentor matching, document reviews, and workshop scheduling across Guidance Grid.";
-        }
-
-        messagesContainer.appendChild(aiMsg);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 600);
-}
-
-// Simulated Subscription State
-let userSubscription = {
-    hasProductsAccess: false,
-    hasReviewAccess: false,
-    hasMentorshipAccess: false
-};
-
-// Access Gatekeeper Helper
-function checkServiceAccess(serviceType, actionCallback) {
-    if (serviceType === 'products' && !userSubscription.hasProductsAccess) {
-        if (confirm("Subscription Required: You need a 'Toolkit Pass' or 'All-Access VIP' to download this product. Would you like to view subscription plans?")) {
-            window.location.href = "subscriptions.html";
-        }
-        return;
-    }
-    
-    if (serviceType === 'mentorship' && !userSubscription.hasMentorshipAccess) {
-        if (confirm("Subscription Required: You need a 'Direct Advisory' or 'All-Access VIP' plan to book 1-on-1 sessions. Would you like to view subscription plans?")) {
-            window.location.href = "subscriptions.html";
-        }
-        return;
-    }
-
-    // If active, execute original action
-    actionCallback();
-}

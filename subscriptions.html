@@ -12,9 +12,16 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">Guidance<span>Grid</span></a></div>
-        <ul class="nav-links">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
+            <li><a href="#mentor-section">Find a Mentor</a></li>
+            <li><a href="#career-paths">Career Paths</a></li>
             <li><a href="learning.html">Learning Hub</a></li>
             <li><a href="products.html">Digital Products</a></li>
             <li><a href="subscriptions.html" class="active">Subscriptions</a></li>
@@ -47,8 +54,7 @@
                     <p class="plan-subtitle">For users needing downloadable resources and templates.</p>
                 </div>
                 <div class="plan-price">
-                    <span class="currency-primary">₦10,000</span>
-                    <span class="currency-secondary">/ MWK 12,000</span>
+                    <span class="currency-primary">MK 12,000</span>
                     <span class="plan-duration">Monthly Access</span>
                 </div>
                 <ul class="plan-features">
@@ -68,8 +74,7 @@
                     <p class="plan-subtitle">For targeted feedback on proposals and CVs.</p>
                 </div>
                 <div class="plan-price">
-                    <span class="currency-primary">₦18,000</span>
-                    <span class="currency-secondary">/ MWK 22,000</span>
+                    <span class="currency-primary">MK 22,000</span>
                     <span class="plan-duration">Monthly Access</span>
                 </div>
                 <ul class="plan-features">
@@ -89,8 +94,7 @@
                     <p class="plan-subtitle">Personalized live consultation with sector leads.</p>
                 </div>
                 <div class="plan-price">
-                    <span class="currency-primary">₦40,000</span>
-                    <span class="currency-secondary">/ MWK 50,000</span>
+                    <span class="currency-primary">MK 50,000</span>
                     <span class="plan-duration">Monthly Access</span>
                 </div>
                 <ul class="plan-features">
@@ -111,8 +115,7 @@
                     <p class="plan-subtitle">Complete access across mentorship, products, and hub.</p>
                 </div>
                 <div class="plan-price">
-                    <span class="currency-primary">₦65,000</span>
-                    <span class="currency-secondary">/ MWK 80,000</span>
+                    <span class="currency-primary">MK 80,000</span>
                     <span class="plan-duration">Monthly Access</span>
                 </div>
                 <ul class="plan-features">
@@ -133,5 +136,6 @@
         <p>&copy; 2026 Guidance Grid Network. All rights reserved.</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
