@@ -1728,3 +1728,80 @@ footer {
     padding: 8px 0;
     border-bottom: 1px dashed #f1f5f9;
 }
+
+/* ==========================================================================
+   Responsive Navigation Fix (Mobile & iPad / Tablet Support)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    /* Show the three-line hamburger icon on iPad and mobile */
+    .nav-toggle {
+        display: block !important;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    /* Transform navigation links into a collapsible dropdown menu */
+    .nav-links {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; /* Positions menu directly below the navbar */
+        left: 0;
+        background-color: var(--dark-bg);
+        padding: 20px 5%;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        gap: 15px;
+    }
+    
+    /* Reveal navigation links when active class is toggled via JS */
+    .nav-links.nav-active {
+        display: flex !important;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+}
+/* ==========================================================================
+   Responsive Navigation Fix (Mobile & iPad / Tablet Support)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    /* Show the three-line hamburger icon on iPad and mobile */
+    .nav-toggle {
+        display: block !important;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    /* Transform navigation links into a collapsible dropdown menu */
+    .nav-links {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; /* Positions menu directly below the navbar */
+        left: 0;
+        background-color: var(--dark-bg);
+        padding: 20px 5%;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        gap: 15px;
+    }
+    
+    /* Reveal navigation links when active class is toggled via JS */
+    .nav-links.nav-active {
+        display: flex !important;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+}
